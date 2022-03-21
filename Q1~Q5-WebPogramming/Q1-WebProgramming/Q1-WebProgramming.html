@@ -1,0 +1,222 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Grade Calculator</title>
+  <link href="https://fonts.googleapis.com/css?family=Righteous&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+  <style>
+  
+body {
+  background:cornflowerblue;
+  font-size: 12px;
+}
+
+body, button, input {
+  font-family: 'Times New Roman', cursive;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+}
+
+.background {
+  display: flex;
+  min-height: 100vh;
+}
+
+.container {
+  flex: 0 1 700px;
+  margin: auto;
+  padding: 10px;
+}
+
+.screen {
+  position: relative;
+  background: whitesmoke;
+  border-radius: 15px;
+}
+
+.screen:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 20px;
+  right: 20px;
+  bottom: 0;
+  border-radius: 15px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, .4);
+  z-index: -1;
+}
+
+.screen-body {
+  display: flex;
+}
+
+.screen-body-item {
+  flex: 1;
+  padding: 50px;
+}
+
+.screen-body-item.left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.app-title {
+  display: flex;
+  /*flex-direction: column;*/
+  justify-content: center;
+  align-items: center;
+  color: cornflowerblue;f;
+  font-size: 26px;
+  text-transform: uppercase;
+  border-left: 4px solid #218c74;
+  padding: 10px;
+}
+
+.app-form-group {
+  margin-bottom: 15px;
+}
+
+.app-form-group.buttons {
+  margin-bottom: 0;
+  text-align: right;
+}
+
+.app-form-control {
+  width: 100%;
+  padding: 10px 0;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #666;
+  color: #ddd;
+  font-size: 14px;
+  text-transform: uppercase;
+  outline: none;
+  transition: border-color .2s;
+}
+
+.app-form-control::placeholder {
+  color: cornflowerblue;
+}
+
+.app-form-control:focus {
+  border-bottom-color: #ddd;
+}
+
+.app-form-button {
+  background: none;
+  border: none;
+  color: cornflowerblue;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+  text-transform: uppercase;
+}
+
+.app-form-button:hover {
+  color: cornflowerblue;
+}
+
+.showdata{
+  text-align: center;
+  color: white;
+  font-size: 1.2rem;
+  padding-top: -10px;
+  padding-bottom: 10px;
+}
+
+  </style>
+</head>
+<body>
+
+<div class="background">
+  <div class="container">
+    <div class="screen">
+      <div class="screen-body">
+        <div class="screen-body-item left">
+          <div class="app-title">
+            <div class="animated infinite pulse">
+              Student Grade Calculator 
+            </div>
+          </div>
+        </div>
+        <div class="screen-body-item">
+          <div class="app-form">
+            <div class="app-form-group">
+              <input type="text" class="app-form-control" placeholder="Student Id" id="nim">
+            </div>
+            <div class="app-form-group">
+              <input type="text" class="app-form-control" placeholder="Name" id="nama">
+            </div>
+            <div class="app-form-group">
+              <input type="text" class="app-form-control" placeholder="Homework Score" id="tugas">
+            </div>
+            <div class="app-form-group">
+              <input  type="text"  class="app-form-control"   placeholder="Participation Score" id="partisipasi">
+            </div>
+             <div class="app-form-group">
+              <input  type="text"  class="app-form-control"   placeholder="Mid-Exam Score" id="uts">
+            </div>
+            <div class="app-form-group">
+              <input  type="text"  class="app-form-control"   placeholder="Final Exam Score" id="uas" >
+            </div>
+            <div > 
+              <input type="button" name="" value="Count" class="app-form-button" onclick="calcy()">
+            </div>            
+          </div>
+      </div>
+
+    </div>
+      <div class="app-form-group showdata">
+              <p id="showData" >  </p>
+     </div>
+  </div>
+</div>
+<footer class="text-white text-center pb-3 fixed-bottom">
+    <p> Created by <a href="" class="fw-bold text-white"></a></span>Serly A | 2022</span></a></p>
+      </footer>
+
+<script>
+  
+const calcy = () =>{
+  let nim = document.getElementById('nim').value;
+  let nama = document.getElementById('nama').value;
+  let tugas = document.getElementById('tugas').value;
+  let partisipasi = document.getElementById('partisipasi').value;
+  let uts = document.getElementById('uts').value;
+  let uas = document.getElementById('uas').value;
+
+
+  if (nim === "" || nama === "" || tugas == 0 || partisipasi == 0 || uts == 0 || uas == 0) {
+                alert("Isi Semua Form!")
+            } else {
+                if (tugas > 100 || partisipasi > 100 || uts > 100 || uas > 100) {
+                    alert("Nilai Tidak Boleh Lebih Dari 100");
+                } else {
+                    let nilaiAngka = (Number(tugas)+Number(partisipasi)+Number(uts)+Number(uas))/4;
+                    if (nilaiAngka <= 50) {
+                        document.getElementById('showData').innerHTML = "C";
+                    } else if (nilaiAngka > 50 && nilaiAngka <= 60) {
+                        document.getElementById('showData').innerHTML = "C+";
+                    } else if (nilaiAngka > 60 && nilaiAngka <= 70) {
+                        document.getElementById('showData').innerHTML = "B";
+                    } else if (nilaiAngka > 70 && nilaiAngka <= 80) {
+                        document.getElementById('showData').innerHTML = "B+";
+                    } else if (nilaiAngka > 80 && nilaiAngka <= 90) {
+                        document.getElementById('showData').innerHTML = "A";
+                    } else if (nilaiAngka > 90 && nilaiAngka <= 100) {
+                        document.getElementById('showData').innerHTML = "A+";
+                    }
+                }
+            }
+        }
+        
+
+</script>
+
+</body>
+</html>

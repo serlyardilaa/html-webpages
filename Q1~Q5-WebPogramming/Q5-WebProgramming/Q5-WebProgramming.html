@@ -1,0 +1,129 @@
+<html>
+<head>
+<title>Number Verification Form</title>
+  <link href="https://fonts.googleapis.com/css?family=Righteous&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+<style type="text/css">
+
+body {
+  background:whitesmoke;
+  font-size: 12px;
+}
+
+body, button, input {
+  font-family: 'Times New Roman', cursive;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+}
+
+#kotak {
+padding: 220px;
+width: 600px;
+margin: auto;
+
+}
+#form {
+  padding: 20px;
+  background:cornflowerblue;
+  border-radius: 15px;
+
+}
+
+#form p{
+color: whitesmoke;
+}
+
+.app-title {
+  text-transform: uppercase;
+  font-size: 26px;
+  padding: 10px;
+}
+
+</style>
+</head>
+<body>
+<div class="app-title">
+<div class="animated infinite pulse">
+Validate your number <br> please
+</div>
+</div>
+<div id="kotak">
+
+<div id="form">
+<form method="post" onsubmit="return Validasi();">
+<table align="center">
+<tr>
+<td align="left"><p><b>Email</b></p></td>
+<td><p><b>:</b></p></td>
+<td align="left"><input type="text" size="30" id="email"></td>
+
+</tr>
+
+</tr>
+<tr>
+<td align="left"><p><b>Phone Number</b></p></td>
+<td><p><b>:</b></p></td>
+<td align="left"><input type="text" id="notelepon"></td>
+
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td><input type="submit" name="submit" value="Send Email Verification"></td>
+
+</tr>
+</form>
+</table>
+
+</div>
+</div>
+<footer class="text-white text-center pb-3 fixed-bottom">
+  <p> Created by <a href="" class="fw-bold text-white"></a></span>Serly A | 2022</span></a></p>
+    </footer>
+<script type="text/javascript">
+function Validasi(){
+
+var angka = "0123456789";
+var x = 0;
+var email=document.getElementById('email').value;
+var notelepon=document.getElementById('notelepon').value;
+if (email=="" || notelepon ==""){
+alert("Form Can Not Be Empty");
+
+}
+
+if ((email.indexOf('@',0)==-1) || (email.indexOf('.',0)==-1)){	
+alert("Wrong Email");
+
+}
+
+
+if (notelepon.length!=12) {
+alert("Phone Number Length Must Be 12 Digit");
+return false;
+}
+
+for (var i=0; i < notelepon.length; i++) {
+
+digitb = "" + notelepon.substring(i, i+1);
+if (angka.indexOf(digita) == "-1") {
+window.alert("Wrong Function");
+return false;
+}
+
+if (angka.indexOf(digitb) == "-1") {
+window.alert("Wrong Phone Number");
+return false;
+}
+
+}
+return true;
+
+}
+
+</script>
+
+</body>
+
+</html>

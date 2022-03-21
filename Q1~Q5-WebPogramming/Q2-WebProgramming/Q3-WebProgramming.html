@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Upload Forms</title>
+  <link href="https://fonts.googleapis.com/css?family=Righteous&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+   <link rel="stylesheet" href="toastr/toastr.css">
+  <style>
+  
+body {
+  background:whitesmoke;
+  font-size: 12px;
+}
+
+body, button, input {
+  font-family: 'Times New Roman', cursive;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+}
+
+.background {
+  display: flex;
+  min-height: 100vh;
+}
+
+.container {
+  flex: 0 1 700px;
+  margin: auto;
+  padding: 10px;
+}
+
+.screen {
+  position: relative;
+  background: cornflowerblue;
+  border-radius: 15px;
+}
+
+.screen:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 20px;
+  right: 20px;
+  bottom: 0;
+  border-radius: 15px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, .4);
+  z-index: -1;
+}
+
+.screen-body {
+  display: flex;
+}
+
+.screen-body-item {
+  flex: 1;
+  padding: 50px;
+}
+
+.screen-body-item.left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.app-title {
+  display: flex;
+  /*flex-direction: column;*/
+  justify-content: center;
+  align-items: center;
+  color:white;f;
+  font-size: 26px;
+  text-transform: uppercase;
+  border-left: 4px solid #218c74;
+  padding: 10px;
+}
+
+.app-form-group {
+  margin-bottom: 15px;
+}
+
+.app-form-group.buttons {
+  margin-bottom: 0;
+  text-align: right;
+}
+
+.app-form-control {
+  width: 100%;
+  padding: 10px 0;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #666;
+  color: #ddd;
+  font-size: 14px;
+  text-transform: uppercase;
+  outline: none;
+  transition: border-color .2s;
+}
+
+.file-upload {
+  display: inline-flex;
+  align-items: center;
+  font-size: 15px;
+}
+
+.file-upload__input {
+  display: none;
+}
+
+.file-upload__button {
+  -webkit-appearance: none;
+  background: whitesmoke;
+  border: 2px solid cornflowerblue;
+  border-radius: 4px;
+  outline: none;
+  padding: 0.5em 0.8em;
+  margin-right: 15px;
+  color: #ffffff;
+  font-size: 1em;
+  font-family: "Times New Roman", sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.file-upload__button:active {
+  background: cornflowerblue;
+}
+
+.file-upload__label {
+  max-width: 250px;
+  font-size: 0.95em;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: "Quicksand", sans-serif;
+}
+
+  </style>
+</head>
+<body>
+
+<div class="background">
+  <div class="container">
+    <div class="screen">
+      <div class="screen-body">
+        <div class="screen-body-item left">
+          <div class="app-title">
+            <div class="animated infinite pulse">
+              Student Upload Form
+            </div>
+          </div>
+        </div>
+        <div class="screen-body-item">
+          <div class="file-upload">
+            <input class="file-upload__button" type="file" id="file"></input>
+            <span class="file-upload__label"></span>
+            <div class="col">
+            <button class="btn btn-success" id="upload">Upload</button>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer class="text-white text-center pb-3 fixed-bottom">
+  <p> Created by <a href="" class="fw-bold text-white"></a></span>Serly A | 2022</span></a></p>
+    </footer>
+<script src="toastr/jquery.js"></script>
+<script src="toastr/toastr.min.js"></script>
+<script>
+        $('#upload').on("click", function () {
+            let file = $("#file").prop("files")[0];
+            let form = new FormData();
+            form.append("file", file);
+            // alert(form);
+            $.ajax({
+                url: "upload.php",
+                cache: false,
+                contentType: false, 
+                processData: false,
+                data: form,
+                type: 'post',
+                success: function (resp) {
+                    toastr.options = {
+                        "closeButton": true,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": true,
+                        "positionClass": "toast-top-center",
+                        "preventDuplicates": true,
+                        "onclick": null,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                        }
+                    toastr["success"]("File Berhasil di Upload!", "Success")
+                }
+            });
+        });
+
+        $("#file").change(function () {
+            let allowed = ['aplication/pdf', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.ms-excel'];
+            let file = this.files[0];
+            let typeFile = file.type;
+            if(!allowed.includes(typeFile)){
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": true,
+                    "positionClass": "toast-top-center",
+                    "preventDuplicates": true,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                    }
+                toastr["warning"]("Hanya File PDF/Excel! saja", "Warning")
+                $("#file").val('');
+                return false;
+            }
+        })
+    </script>
+
+</body>
+</html>
